@@ -28,7 +28,7 @@ const locations: Location[] = [
 			'Riga Technical University campus holding IT, Physics, Chemistry, Construction and some other faculties.',
 		regnant: 'Rihards',
 		image: 'https://placehold.co/600x400?text=Eiffel+Tower',
-		map_marker_image: 'car.png',
+		map_marker_image: 'uni.png',
 		coordinates: { lat: 56.95193, lng: 24.081364 }
 	},
 	{

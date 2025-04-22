@@ -1,9 +1,7 @@
 <script lang="ts">
-    import 'leaflet/dist/leaflet.css';
     import { Icon, Map, Marker, Popup, TileLayer } from 'sveaflet';
-    import type { BaseIconOptions, MapOptions, TileLayerOptions } from 'leaflet';
+    import type { BaseIconOptions, MapOptions } from 'leaflet';
     import type { Location } from '$lib/server/locations';
-    import { onMount } from "svelte";
 
     interface Data {
         locations: Location[];
@@ -17,142 +15,13 @@
     };
 
     const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const tileLayerOptions: TileLayerOptions = {
-        minZoom: 0,
-        maxZoom: 20,
-        maxNativeZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-    };
+    // const tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
     const iconOptions: BaseIconOptions = {
         iconSize: [60, 60],
         iconAnchor: [20, 60],
         popupAnchor: [1, -34],
         tooltipAnchor: [16, -28]
     };
-    const googleMapStyles = [
-        {
-            "featureType": "all",
-            "elementType": "labels.text.fill",
-            "stylers": [
-                {
-                    "color": "#ae2323"
-                }
-            ]
-        },
-        {
-            "featureType": "all",
-            "elementType": "labels.text.stroke",
-            "stylers": [
-                {
-                    "visibility": "on"
-                },
-                {
-                    "color": "#000000"
-                },
-                {
-                    "weight": "1.5"
-                }
-            ]
-        },
-        {
-            "featureType": "all",
-            "elementType": "labels.icon",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "landscape",
-            "elementType": "geometry.fill",
-            "stylers": [
-                {
-                    "color": "#000000"
-                },
-                {
-                    "lightness": "15"
-                }
-            ]
-        },
-        {
-            "featureType": "landscape",
-            "elementType": "geometry.stroke",
-            "stylers": [
-                {
-                    "color": "#ff0000"
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#000000"
-                },
-                {
-                    "lightness": "15"
-                }
-            ]
-        },
-        {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#000000"
-                },
-                {
-                    "lightness": "5"
-                }
-            ]
-        },
-        {
-            "featureType": "transit",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#000000"
-                },
-                {
-                    "lightness": "5"
-                }
-            ]
-        },
-        {
-            "featureType": "transit.station.airport",
-            "elementType": "geometry.fill",
-            "stylers": [
-                {
-                    "visibility": "on"
-                },
-                {
-                    "lightness": "15"
-                }
-            ]
-        },
-        {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [
-                {
-                    "color": "#030506"
-                },
-                {
-                    "lightness": "16"
-                }
-            ]
-        }
-    ];
-
-    onMount(() => {
-        // Load Google Maps API
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB028vR6P3n_IwAp6WZETtHWMXU-ugCL9E`;
-        document.head.appendChild(script);
-    });
-
 </script>
 
 <svelte:head>
