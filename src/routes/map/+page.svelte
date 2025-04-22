@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Map, Marker, Popup, TileLayer } from 'sveaflet';
+    import { Icon, Map, Marker, Popup, TileLayer, ControlLayers, LayerGroup } from 'sveaflet';
     import type { BaseIconOptions, MapOptions } from 'leaflet';
     import type { Location } from '$lib/server/locations';
 
@@ -14,8 +14,8 @@
         zoom: 12
     };
 
-    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    // const tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+    const openStreetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const satelliteUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
     const iconOptions: BaseIconOptions = {
         iconSize: [60, 60],
         iconAnchor: [20, 60],
@@ -33,21 +33,26 @@
 
     <div class="map-container">
         <Map options={mapOptions}>
-            <TileLayer url={tileUrl}/>
+            <ControlLayers>
+                <TileLayer name="Map" url={openStreetMapUrl} checked={true} layerType="base"/>
+                <TileLayer name="Satellite" url={satelliteUrl} layerType="base"/>
 
-            {#each data.locations as location}
-                <Marker latLng={[location.coordinates.lat, location.coordinates.lng]}>
-                    <Icon options={{...iconOptions, iconUrl: 'images/icons/'+location.map_marker_image}}/>
-                    <Popup>
-                        <div class="popup-content">
-                            <b>{location.name}</b>
-                            <img src={location.image} alt={location.name} class="popup-image"/>
-                            <p>{location.description}</p>
-                            <p><b>Regnant:</b>{location.regnant}</p>
-                        </div>
-                    </Popup>
-                </Marker>
-            {/each}
+                <LayerGroup checked={true} name="Locations" layerType="overlay">
+                    {#each data.locations as location}
+                        <Marker latLng={[location.coordinates.lat, location.coordinates.lng]}>
+                            <Icon options={{ ...iconOptions, iconUrl: 'images/icons/' + location.map_marker_image }}/>
+                            <Popup>
+                                <div class="popup-content">
+                                    <b>{location.name}</b>
+                                    <img src={location.image} alt={location.name} class="popup-image"/>
+                                    <p>{location.description}</p>
+                                    <p><b>Regnant:</b>{location.regnant}</p>
+                                </div>
+                            </Popup>
+                        </Marker>
+                    {/each}
+                </LayerGroup>
+            </ControlLayers>
         </Map>
     </div>
 </div>
