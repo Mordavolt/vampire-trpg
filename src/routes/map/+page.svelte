@@ -72,20 +72,42 @@
 
   h1 {
     margin-bottom: 1rem;
+    color: #c00000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
   }
 
   .map-container {
     height: 600px;
     margin-bottom: 1rem;
+    border: 1px solid #500000;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 10px rgba(80, 0, 0, 0.3);
+  }
+
+  /* Override popup styles for the map */
+  :global(.leaflet-popup-content-wrapper) {
+    background-color: #2a0000;
+    color: #e0e0e0;
+    border-radius: 0.25rem;
+  }
+
+  :global(.leaflet-popup-tip) {
+    background-color: #2a0000;
   }
 
   .popup-content {
     max-width: 200px;
+    color: #e0e0e0;
+  }
+
+  .popup-content b {
+    color: #ff9999;
   }
 
   .popup-image {
     width: 100%;
     height: auto;
     margin: 0.5rem 0;
+    border: 1px solid #500000;
   }
 </style>

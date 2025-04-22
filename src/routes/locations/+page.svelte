@@ -41,6 +41,8 @@
 
   h1 {
     margin-bottom: 1rem;
+    color: #c00000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
   }
 
   .locations-grid {
@@ -51,21 +53,30 @@
   }
 
   .location-card {
-    border: 1px solid #e2e8f0;
+    border: 1px solid #500000;
     border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+    background-color: #2a0000;
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.5),
+      0 0 15px rgba(80, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
   }
 
   .location-card:hover {
     transform: translateY(-5px);
+    box-shadow:
+      0 6px 15px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(120, 0, 0, 0.4);
+    border-color: #800000;
   }
 
   .location-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-bottom: 1px solid #500000;
+    filter: saturate(0.9) contrast(1.1);
   }
 
   .location-info {
@@ -76,17 +87,20 @@
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-size: 1.25rem;
+    color: #ff9999;
   }
 
   .location-info p {
     margin-bottom: 1rem;
-    color: #4a5568;
+    color: #e0e0e0;
   }
 
   .location-coordinates {
     display: flex;
     flex-direction: column;
     font-size: 0.875rem;
-    color: #718096;
+    color: #a0a0a0;
+    border-top: 1px solid #500000;
+    padding-top: 0.5rem;
   }
 </style>
