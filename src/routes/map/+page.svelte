@@ -1,85 +1,91 @@
 <script lang="ts">
-    import { Icon, Map, Marker, Popup, TileLayer, ControlLayers, LayerGroup } from 'sveaflet';
-    import type { BaseIconOptions, MapOptions } from 'leaflet';
-    import type { Location } from '$lib/server/locations';
+  import { Icon, Map, Marker, Popup, TileLayer, ControlLayers, LayerGroup } from 'sveaflet';
+  import type { BaseIconOptions, MapOptions } from 'leaflet';
+  import type { Location } from '$lib/server/locations';
 
-    interface Data {
-        locations: Location[];
-    }
+  interface Data {
+    locations: Location[];
+  }
 
-    let { data }: { data: Data } = $props();
+  let { data }: { data: Data } = $props();
 
-    const mapOptions: MapOptions = {
-        center: { lat: 56.949055, lng: 24.099086 },
-        zoom: 12
-    };
+  const mapOptions: MapOptions = {
+    center: { lat: 56.949055, lng: 24.099086 },
+    zoom: 12
+  };
 
-    const openStreetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    const satelliteUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-    const iconOptions: BaseIconOptions = {
-        iconSize: [60, 60],
-        iconAnchor: [20, 60],
-        popupAnchor: [1, -34],
-        tooltipAnchor: [16, -28]
-    };
+  const openStreetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const satelliteUrl =
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+  const iconOptions: BaseIconOptions = {
+    iconSize: [60, 60],
+    iconAnchor: [20, 60],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28]
+  };
 </script>
 
 <svelte:head>
-    <title>Map - Locations Explorer</title>
+  <title>Map - Locations Explorer</title>
 </svelte:head>
 
 <div class="container">
-    <h1>Locations Map</h1>
+  <h1>Locations Map</h1>
 
-    <div class="map-container">
-        <Map options={mapOptions}>
-            <ControlLayers>
-                <TileLayer name="Map" url={openStreetMapUrl} checked={true} layerType="base"/>
-                <TileLayer name="Satellite" url={satelliteUrl} layerType="base"/>
+  <div class="map-container">
+    <Map options={mapOptions}>
+      <ControlLayers>
+        <TileLayer name="Map" url={openStreetMapUrl} checked={true} layerType="base" />
+        <TileLayer name="Satellite" url={satelliteUrl} layerType="base" />
 
-                <LayerGroup checked={true} name="Locations" layerType="overlay">
-                    {#each data.locations as location}
-                        <Marker latLng={[location.coordinates.lat, location.coordinates.lng]}>
-                            <Icon options={{ ...iconOptions, iconUrl: 'images/icons/' + location.map_marker_image }}/>
-                            <Popup>
-                                <div class="popup-content">
-                                    <b>{location.name}</b>
-                                    <img src={location.image} alt={location.name} class="popup-image"/>
-                                    <p>{location.description}</p>
-                                    <p><b>Regnant:</b>{location.regnant}</p>
-                                </div>
-                            </Popup>
-                        </Marker>
-                    {/each}
-                </LayerGroup>
-            </ControlLayers>
-        </Map>
-    </div>
+        <LayerGroup checked={true} name="Locations" layerType="overlay">
+          {#each data.locations as location}
+            <Marker latLng={[location.coordinates.lat, location.coordinates.lng]}>
+              <Icon
+                options={{
+                  ...iconOptions,
+                  iconUrl: 'images/icons/' + location.map_marker_image
+                }}
+              />
+              <Popup>
+                <div class="popup-content">
+                  <b>{location.name}</b>
+                  <img src={location.image} alt={location.name} class="popup-image" />
+                  <p>{location.description}</p>
+                  <p><b>Regnant:</b>{location.regnant}</p>
+                </div>
+              </Popup>
+            </Marker>
+          {/each}
+        </LayerGroup>
+      </ControlLayers>
+    </Map>
+  </div>
 </div>
 
 <style>
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem;
-    }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
 
-    h1 {
-        margin-bottom: 1rem;
-    }
+  h1 {
+    margin-bottom: 1rem;
+  }
 
-    .map-container {
-        height: 600px;
-        margin-bottom: 1rem;
-    }
+  .map-container {
+    height: 600px;
+    margin-bottom: 1rem;
+  }
 
-    .popup-content {
-        max-width: 200px;
-    }
+  .popup-content {
+    max-width: 200px;
+  }
 
-    .popup-image {
-        width: 100%;
-        height: auto;
-        margin: 0.5rem 0;
-    }
+  .popup-image {
+    width: 100%;
+    height: auto;
+    margin: 0.5rem 0;
+  }
 </style>
