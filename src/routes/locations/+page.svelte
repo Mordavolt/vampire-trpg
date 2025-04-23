@@ -6,6 +6,7 @@
   }
 
   let { data }: { data: Data } = $props();
+  let selectedImage = $state('');
 </script>
 
 <svelte:head>
@@ -18,7 +19,16 @@
   <div class="locations-grid">
     {#each data.locations as location}
       <div class="location-card">
-        <img src={'images/locations/' + location.image} alt={location.name} class="location-image" />
+        <button
+          onclick={() => (selectedImage = 'images/locations/' + location.image)}
+          style="border: none; background: none; padding: 0;"
+        >
+          <img
+            src={'images/locations/' + location.image}
+            alt={location.name}
+            class="location-image cursor-pointer"
+          />
+        </button>
         <div class="location-info">
           <h2>{location.name}</h2>
           <p>{location.description}</p>
@@ -31,6 +41,20 @@
     {/each}
   </div>
 </div>
+
+{#if selectedImage}
+  <button
+    onclick={() => (selectedImage = '')}
+    class="fixed inset-0 backdrop-blur-lg bg-gray-900 bg-opacity-30 flex items-center justify-center z-50"
+    style="border: none; background: none; padding: 0;"
+  >
+    <img
+      src={selectedImage}
+      alt="Full size"
+      class="object-cover rounded-lg shadow-lg border-4 border-white"
+    />
+  </button>
+{/if}
 
 <style>
   .container {

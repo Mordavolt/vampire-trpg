@@ -65,7 +65,11 @@
               <Popup>
                 <div class="popup-content">
                   <b>{location.name}</b>
-                  <img src={'images/locations/' + location.image} alt={location.name} class="popup-image" />
+                  <img
+                    src={'images/locations/' + location.image}
+                    alt={location.name}
+                    class="popup-image"
+                  />
                   <p>{location.description}</p>
                   <p><b>Regnant:</b>{location.regnant}</p>
                 </div>
