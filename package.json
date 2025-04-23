@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "leaflet": "^1.9.4",
-    "leaflet.gridlayer.googlemutant": "^0.15.0",
     "sveaflet": "^0.1.4"
   }
 }

@@ -1,10 +1,21 @@
 <script lang="ts">
-  import { Icon, Map, Marker, Popup, TileLayer, ControlLayers, LayerGroup } from 'sveaflet';
+  import {
+    ControlLayers,
+    Icon,
+    LayerGroup,
+    Map,
+    Marker,
+    Popup,
+    TileLayer,
+    Polygon
+  } from 'sveaflet';
   import type { BaseIconOptions, MapOptions } from 'leaflet';
   import type { Location } from '$lib/server/locations';
+  import type { Domain } from '$lib/server/domains';
 
   interface Data {
     locations: Location[];
+    domains: Domain[];
   }
 
   let { data }: { data: Data } = $props();
@@ -19,7 +30,7 @@
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
   const iconOptions: BaseIconOptions = {
     iconSize: [60, 60],
-    iconAnchor: [20, 60],
+    iconAnchor: [30, 30],
     popupAnchor: [1, -34],
     tooltipAnchor: [16, -28]
   };
@@ -35,8 +46,8 @@
   <div class="map-container">
     <Map options={mapOptions}>
       <ControlLayers>
-        <TileLayer name="Map" url={openStreetMapUrl} checked={true} layerType="base" />
-        <TileLayer name="Satellite" url={satelliteUrl} layerType="base" />
+        <TileLayer name="Satellite" url={satelliteUrl} checked={true} layerType="base" />
+        <TileLayer name="Map" url={openStreetMapUrl} layerType="base" />
 
         <LayerGroup checked={true} name="Locations" layerType="overlay">
           {#each data.locations as location}
@@ -56,6 +67,16 @@
                 </div>
               </Popup>
             </Marker>
+          {/each}
+        </LayerGroup>
+        <LayerGroup checked={true} name="Domains" layerType="overlay">
+          {#each data.domains as domain}
+            <Polygon
+              latLngs={domain.coordinates}
+              options={{
+                color: domain.color
+              }}
+            />
           {/each}
         </LayerGroup>
       </ControlLayers>
@@ -93,6 +114,10 @@
 
   :global(.leaflet-popup-tip) {
     background-color: #2a0000;
+  }
+
+  :global(.leaflet-marker-icon) {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(360deg) brightness(100%) contrast(100%);
   }
 
   .popup-content {
