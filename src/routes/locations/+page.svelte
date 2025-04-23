@@ -18,7 +18,7 @@
   <div class="locations-grid">
     {#each data.locations as location}
       <div class="location-card">
-        <img src={location.image} alt={location.name} class="location-image" />
+        <img src={'images/locations/' + location.image} alt={location.name} class="location-image" />
         <div class="location-info">
           <h2>{location.name}</h2>
           <p>{location.description}</p>

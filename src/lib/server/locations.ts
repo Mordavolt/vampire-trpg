@@ -5,6 +5,7 @@ export interface Location {
   image: string;
   map_marker_image: string;
   regnant: string;
+  destroyed: boolean;
   coordinates: {
     lat: number;
     lng: number;
@@ -17,8 +18,9 @@ const locations: Location[] = [
     name: 'Rihards car service',
     description: 'The office and centre of operations for Rihards the data broker Nosferatu.',
     regnant: 'Rihards',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'garage.png',
     map_marker_image: 'garage.svg',
+    destroyed: true,
     coordinates: { lat: 56.955049, lng: 24.071659 }
   },
   {
@@ -27,8 +29,9 @@ const locations: Location[] = [
     description:
       'Riga Technical University campus holding IT, Physics, Chemistry, Construction and some other faculties.',
     regnant: 'Rihards',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'university.png',
     map_marker_image: 'university.svg',
+    destroyed: false,
     coordinates: { lat: 56.95193, lng: 24.081364 }
   },
   {
@@ -36,8 +39,9 @@ const locations: Location[] = [
     name: 'Passenger Port',
     description: 'Riga passenger port accepting cruise ships and other passenger vessels.',
     regnant: 'Anastasija',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'passenger_port.png',
     map_marker_image: 'passenger_port.svg',
+    destroyed: false,
     coordinates: { lat: 56.956597, lng: 24.096075 }
   },
   {
@@ -46,8 +50,9 @@ const locations: Location[] = [
     description:
       'Riga cargo port loading and offloading container ships. The port continues down the river for many kilometers. This is the HQ location.',
     regnant: 'Anastasija',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'cargo_port.png',
     map_marker_image: 'cargo_port.svg',
+    destroyed: false,
     coordinates: { lat: 56.977276, lng: 24.09445 }
   },
   {
@@ -55,8 +60,9 @@ const locations: Location[] = [
     name: 'Audreys Crypt',
     description: "Audrey's haven, a gift from her sire Andris.",
     regnant: 'Andris',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'crypt.png',
     map_marker_image: 'crypt.svg',
+    destroyed: true,
     coordinates: { lat: 56.971887, lng: 24.143514 }
   },
   {
@@ -65,8 +71,9 @@ const locations: Location[] = [
     description:
       "Edgar's haven. Has a secret bunker entrance underneath. The bunker is haunted by the ghost of a communist doomsday prepper.",
     regnant: 'Rihards',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'church.png',
     map_marker_image: 'church.svg',
+    destroyed: false,
     coordinates: { lat: 56.950251, lng: 24.071943 }
   },
   {
@@ -75,8 +82,9 @@ const locations: Location[] = [
     description:
       "James's haven. Apartment in a soviet apartment building. Windows covered with cardboard.",
     regnant: '???',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'appartment.png',
     map_marker_image: 'appartment.svg',
+    destroyed: false,
     coordinates: { lat: 56.959889, lng: 24.028703 }
   },
   {
@@ -84,8 +92,9 @@ const locations: Location[] = [
     name: 'Felixs hospital',
     description: "Felix's haven and workplace. Top hospital in Riga.",
     regnant: '???',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'hospital.png',
     map_marker_image: 'hospital.svg',
+    destroyed: false,
     coordinates: { lat: 56.931609, lng: 24.065486 }
   },
   {
@@ -93,8 +102,9 @@ const locations: Location[] = [
     name: 'Mishas gym',
     description: 'The centre of operations for Mihails, the sheriff of Riga.',
     regnant: 'Mihails',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'boxing.png',
     map_marker_image: 'boxing.svg',
+    destroyed: false,
     coordinates: { lat: 56.941924, lng: 24.115902 }
   },
   {
@@ -102,8 +112,9 @@ const locations: Location[] = [
     name: 'Church of the Resurrection (Morgue)',
     description: "Morgue, storing bodies before burial. Audrey's feeding ground.",
     regnant: 'Andris',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'morgue.png',
     map_marker_image: 'morgue.svg',
+    destroyed: true,
     coordinates: { lat: 56.971816, lng: 24.145988 }
   },
   {
@@ -111,18 +122,30 @@ const locations: Location[] = [
     name: 'Boat Restaurant',
     description: 'Restaurant on a boat. Neutral territory. Serve fried fish and chips mostly.',
     regnant: '???',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'restaurant.png',
     map_marker_image: 'restaurant.svg',
+    destroyed: false,
     coordinates: { lat: 56.952101, lng: 24.097885 }
   },
   {
     id: '12',
     name: 'Liela Gilde',
-    description: 'The Big Guild. Historical merchant guild headquarters. Princes haven.',
+    description: 'The Grand Guild. Historical merchant guild headquarters. Princes haven.',
     regnant: 'Sergejs',
-    image: 'https://placehold.co/600x400?text=Picture',
+    image: 'gilde.png',
     map_marker_image: 'gilde.svg',
+    destroyed: true,
     coordinates: { lat: 56.949814, lng: 24.108094 }
+  },
+  {
+    id: '13',
+    name: 'Brasa prison',
+    description: 'An old prison and occasionally vampire hostel. Andris haven and art studio.',
+    regnant: 'Andris',
+    image: 'prison.png',
+    map_marker_image: 'prison.svg',
+    destroyed: false,
+    coordinates: { lat: 56.979319, lng: 24.143493 }
   }
 ];
 

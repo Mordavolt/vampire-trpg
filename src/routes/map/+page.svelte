@@ -5,11 +5,12 @@
     LayerGroup,
     Map,
     Marker,
+    Polygon,
     Popup,
     TileLayer,
-    Polygon
+    Tooltip
   } from 'sveaflet';
-  import type { BaseIconOptions, MapOptions } from 'leaflet';
+  import type { MapOptions } from 'leaflet';
   import type { Location } from '$lib/server/locations';
   import type { Domain } from '$lib/server/domains';
 
@@ -24,16 +25,6 @@
     center: { lat: 56.949055, lng: 24.099086 },
     zoom: 12
   };
-
-  const openStreetMapUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  const satelliteUrl =
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-  const iconOptions: BaseIconOptions = {
-    iconSize: [60, 60],
-    iconAnchor: [30, 30],
-    popupAnchor: [1, -34],
-    tooltipAnchor: [16, -28]
-  };
 </script>
 
 <svelte:head>
@@ -46,22 +37,35 @@
   <div class="map-container">
     <Map options={mapOptions}>
       <ControlLayers>
-        <TileLayer name="Satellite" url={satelliteUrl} checked={true} layerType="base" />
-        <TileLayer name="Map" url={openStreetMapUrl} layerType="base" />
+        <TileLayer
+          name="Satellite"
+          url={'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'}
+          checked={true}
+          layerType="base"
+        />
+        <TileLayer
+          name="Map"
+          url={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+          layerType="base"
+        />
 
         <LayerGroup checked={true} name="Locations" layerType="overlay">
           {#each data.locations as location}
             <Marker latLng={[location.coordinates.lat, location.coordinates.lng]}>
               <Icon
                 options={{
-                  ...iconOptions,
-                  iconUrl: 'images/icons/' + location.map_marker_image
+                  iconSize: [60, 60],
+                  iconAnchor: [30, 30],
+                  popupAnchor: [0, -30],
+                  iconUrl: 'images/icons/' + location.map_marker_image,
+                  className: location.destroyed ? 'marker-icon-red' : 'marker-icon-white'
                 }}
               />
+              <Tooltip class={location.destroyed ? 'line-through' : ''}>{location.name}</Tooltip>
               <Popup>
                 <div class="popup-content">
                   <b>{location.name}</b>
-                  <img src={location.image} alt={location.name} class="popup-image" />
+                  <img src={'images/locations/' + location.image} alt={location.name} class="popup-image" />
                   <p>{location.description}</p>
                   <p><b>Regnant:</b>{location.regnant}</p>
                 </div>
@@ -76,7 +80,7 @@
               options={{
                 color: domain.color
               }}
-            />
+            ></Polygon>
           {/each}
         </LayerGroup>
       </ControlLayers>
@@ -116,8 +120,12 @@
     background-color: #2a0000;
   }
 
-  :global(.leaflet-marker-icon) {
+  :global(.marker-icon-white) {
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(360deg) brightness(100%) contrast(100%);
+  }
+
+  :global(.marker-icon-red) {
+    filter: invert(19%) sepia(96%) saturate(6101%) hue-rotate(350deg) brightness(71%) contrast(113%);
   }
 
   .popup-content {
