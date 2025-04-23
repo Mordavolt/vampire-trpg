@@ -82,7 +82,7 @@ const locations: Location[] = [
   {
     id: '8',
     name: 'Felixs hospital',
-    description: "Filix's haven and workplace. Top hospital in Riga.",
+    description: "Felix's haven and workplace. Top hospital in Riga.",
     regnant: '???',
     image: 'https://placehold.co/600x400?text=Picture',
     map_marker_image: 'hospital.svg',
