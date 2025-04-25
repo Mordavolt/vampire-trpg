@@ -78,12 +78,12 @@ const locations: Location[] = [
   },
   {
     id: '7',
-    name: 'James appartment building',
+    name: 'James apartment building',
     description:
       "James's haven. Apartment in a soviet apartment building. Windows covered with cardboard.",
     regnant: '???',
-    image: 'appartment.png',
-    map_marker_image: 'appartment.svg',
+    image: 'apartment.png',
+    map_marker_image: 'apartment.svg',
     destroyed: false,
     coordinates: { lat: 56.959889, lng: 24.028703 }
   },
@@ -146,6 +146,16 @@ const locations: Location[] = [
     map_marker_image: 'prison.svg',
     destroyed: false,
     coordinates: { lat: 56.979319, lng: 24.143493 }
+  },
+  {
+    id: '14',
+    name: 'Audreys apartment',
+    description: 'An apartment given to Audrey as a haven. Old, dilapidated, but safe. For now.',
+    regnant: 'Andris',
+    image: 'audreys_apartment.png',
+    map_marker_image: 'apartment.svg',
+    destroyed: false,
+    coordinates: { lat: 56.975975, lng: 24.139179 }
   }
 ];
 
